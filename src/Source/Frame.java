@@ -5,15 +5,13 @@
  */
 package Source;
 
-import java.awt.Color;
-import java.awt.Graphics;
 
 /**
  *
  * @author lmejiaf
  */
 public class Frame extends javax.swing.JFrame {
-int diametro;
+
     /**
      * Creates new form Frame
      */
@@ -97,17 +95,22 @@ int diametro;
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-
-        int diametro = 50;
-        int radio= diametro/2;
+        Nodo n= new Nodo();
+        n.posX= evt.getX();
+        n.posY= evt.getY();
+        n.graficar(this);
         
-        Graphics g = getGraphics();
-        g.setColor(Color.red);
-        g.fillOval(evt.getX() - radio, evt.getY() - radio, diametro, diametro);
-        g.setColor(Color.black);
-        g.drawLine(evt.getX(),evt.getY() , evt.getX() - radio, evt.getY() - radio);
         
-        g.dispose();
+//        int diametro = 50;
+//        int radio= diametro/2;
+//        
+//        Graphics g = getGraphics();
+//        g.setColor(Color.red);
+//        g.fillOval(evt.getX() - radio, evt.getY() - radio, diametro, diametro);
+//        g.setColor(Color.black);
+//        g.drawLine(evt.getX(),evt.getY() , evt.getX() - radio, evt.getY() - radio);
+//        
+//        g.dispose();
 
         // TODO add your handling code here:
     }//GEN-LAST:event_formMouseClicked
