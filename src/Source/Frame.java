@@ -5,6 +5,7 @@
  */
 package Source;
 
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -28,6 +29,7 @@ public class Frame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -44,7 +46,7 @@ public class Frame extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
 
         jLabel1.setLabelFor(jTextField1);
-        jLabel1.setText("Nombre del hijo");
+        jLabel1.setText("Clave del nodo");
 
         jButton1.setText("Insertar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -64,7 +66,7 @@ public class Frame extends javax.swing.JFrame {
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addContainerGap(323, Short.MAX_VALUE))
+                .addContainerGap(330, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,12 +97,7 @@ public class Frame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        Nodo n= new Nodo();
-        n.posX= evt.getX();
-        n.posY= evt.getY();
-        n.graficar(this);
-        
-        
+
 //        int diametro = 50;
 //        int radio= diametro/2;
 //        
@@ -111,15 +108,28 @@ public class Frame extends javax.swing.JFrame {
 //        g.drawLine(evt.getX(),evt.getY() , evt.getX() - radio, evt.getY() - radio);
 //        
 //        g.dispose();
-
         // TODO add your handling code here:
     }//GEN-LAST:event_formMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+//jTextField1.getText()
 
-        
-        
-        
+        if (!jTextField1.getText().isEmpty()) {
+
+            if (isNumber(jTextField1.getText())) {
+                Nodo n = new Nodo();
+                n.soyRaizDelArbol=true;
+                n.posX = getWidth()/2-n.radio;
+                n.posY = jPanel1.getHeight()+n.radio;
+                n.clave = Integer.parseInt(jTextField1.getText());
+                n.graficar(this);
+            }
+
+        }else{
+            JOptionPane.showMessageDialog(this,"El campo clave no puede estar vacio");
+        }
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -158,9 +168,22 @@ public class Frame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
+    public boolean isNumber(String cadena) {
+        try {
+            Integer.parseInt(cadena);
+            return true;
+
+        } catch (NumberFormatException e) {
+            return false;
+
+        }
+    }
+
 }
