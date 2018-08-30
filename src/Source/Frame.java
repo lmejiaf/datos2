@@ -13,6 +13,8 @@ import javax.swing.JOptionPane;
  */
 public class Frame extends javax.swing.JFrame {
 
+    Nodo raizArbol;
+
     /**
      * Creates new form Frame
      */
@@ -34,8 +36,10 @@ public class Frame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         setResizable(false);
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -55,6 +59,14 @@ public class Frame extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(255, 102, 102));
+        jButton2.setText("X");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -66,7 +78,8 @@ public class Frame extends javax.swing.JFrame {
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addContainerGap(330, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 287, Short.MAX_VALUE)
+                .addComponent(jButton2))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -77,6 +90,9 @@ public class Frame extends javax.swing.JFrame {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addGap(19, 19, 19))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jButton2)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -118,19 +134,30 @@ public class Frame extends javax.swing.JFrame {
 
             if (isNumber(jTextField1.getText())) {
                 Nodo n = new Nodo();
-                n.soyRaizDelArbol=true;
-                n.posX = getWidth()/2-n.radio;
-                n.posY = jPanel1.getHeight()+n.radio;
+                n.soyRaizDelArbol = true;
+                n.posX = getWidth() / 2 - n.radio;//+radio o -radio
+                n.posY = jPanel1.getHeight() + n.radio;//+yf_AD o +yf_AI
                 n.clave = Integer.parseInt(jTextField1.getText());
-                n.graficar(this);
+                n.generarLocalizacion();
+                if (insertar(n, raizArbol)) {
+                    n.graficar(this);
+
+                }
             }
 
-        }else{
-            JOptionPane.showMessageDialog(this,"El campo clave no puede estar vacio");
+        } else {
+            JOptionPane.showMessageDialog(this, "El campo clave no puede estar vacio");
         }
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        System.exit(0);
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,6 +197,7 @@ public class Frame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
@@ -184,6 +212,49 @@ public class Frame extends javax.swing.JFrame {
             return false;
 
         }
+    }
+
+    public boolean insertar(Nodo n, Nodo raiz) {
+
+        if (raizArbol == null) {
+            n.soyRaizDelArbol = true;
+
+            raizArbol = n;
+
+            return true;
+        } else {
+            n.soyRaizDelArbol = false;
+            if (n.clave > raiz.clave) {
+                if (raiz.derecho == null) {
+                    n.posX += n.radio;
+                    n.posY += (n.diametro + n.radio);
+                    raiz.derecho = n;
+                    return true;
+                } else {
+                    n.posX += n.radio;
+                    n.posY += (n.diametro + n.radio);
+                    insertar(n, raiz.derecho);
+                }
+            } else if (n.clave < raiz.clave) {
+                if (raiz.izquierdo == null) {
+                    n.posX -= n.radio;
+                    n.posY += (n.diametro + n.radio);
+
+                    raiz.izquierdo = n;
+                } else {
+                    n.posX -= n.radio;
+                    n.posY += (n.diametro + n.radio);
+
+                    insertar(n, raiz.izquierdo);
+                    return true;
+
+                }
+            } else {
+                return false;
+            }
+        }
+
+        return false;
     }
 
 }

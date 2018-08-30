@@ -39,20 +39,12 @@ public class Nodo {
         g.drawLine(posX + radio, posY + radio, posX + diametro, posY + diametro);//derecho
         g.drawLine(posX + radio, posY + radio, posX, posY + diametro);//izquierdo
 
-        xf_AristaS = posX + radio;
-        yf_AristaS = posY - radio;
-
-        xf_AristaD = posX + diametro;
-        yf_AristaD = posY + diametro;
-
-        xf_AristaI = posX;
-        yf_AristaI = posY + diametro;
+        
 
         g.setColor(Color.red);
         g.fillOval(posX, posY, diametro, diametro);//el nodo en si
 
-        posXcentro = posX + radio;
-        posYcentro = posY + radio;
+       
 
         g.setColor(Color.black);
         g.drawString(String.valueOf(clave), posX + radio, posY + radio);
@@ -64,5 +56,24 @@ public class Nodo {
         g.dispose();
 
     }
+
+    public void generarLocalizacion() {
+        xf_AristaS = posX + radio;
+        yf_AristaS = posY - radio;
+
+        xf_AristaD = posX + diametro;
+        yf_AristaD = posY + diametro;
+
+        xf_AristaI = posX;
+        yf_AristaI = posY + diametro;
+
+        posXcentro = posX + radio;
+        posYcentro = posY + radio;
+
+    }
+    
+    
+    
+    
 
 }
