@@ -139,7 +139,7 @@ public class Frame extends javax.swing.JFrame {
                 n.posY = jPanel1.getHeight() + n.radio;//+yf_AD o +yf_AI
                 n.clave = Integer.parseInt(jTextField1.getText());
                 n.generarLocalizacion();
-                if (insertar(n, raizArbol)) {
+                if (insertar(n, raizArbol, 1)) {
                     n.graficar(this);
 
                 }
@@ -214,7 +214,7 @@ public class Frame extends javax.swing.JFrame {
         }
     }
 
-    public boolean insertar(Nodo n, Nodo raiz) {
+    public boolean insertar(Nodo n, Nodo raiz, int nivel) {
 
         if (raizArbol == null) {
             n.soyRaizDelArbol = true;
@@ -233,19 +233,17 @@ public class Frame extends javax.swing.JFrame {
                 } else {
                     n.posX += n.radio;
                     n.posY += (n.diametro + n.radio);
-                    insertar(n, raiz.derecho);
+                    insertar(n, raiz.derecho, nivel++);
                 }
             } else if (n.clave < raiz.clave) {
                 if (raiz.izquierdo == null) {
                     n.posX -= n.radio;
                     n.posY += (n.diametro + n.radio);
-
                     raiz.izquierdo = n;
                 } else {
                     n.posX -= n.radio;
                     n.posY += (n.diametro + n.radio);
-
-                    insertar(n, raiz.izquierdo);
+                    insertar(n, raiz.izquierdo, nivel++);
                     return true;
 
                 }
