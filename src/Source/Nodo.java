@@ -7,7 +7,7 @@ package Source;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -15,65 +15,130 @@ import javax.swing.JFrame;
  */
 public class Nodo {
 
-    Graphics g;
+    //graficas del nodo
+    private Graphics g;
+    private int posX;
+    private int posY;
+    private int width = 50;
+    private int height = 30;
 
-    int posX, posY, posXcentro, posYcentro;
-    int diametro = 50;
-    int radio = diametro / 2;
+    //cosas del nodo en si
+    private int clave;
+    private Nodo derecho;
+    private Nodo izquierdo;
 
-    int xf_AristaS, yf_AristaS;
-    int xf_AristaD, yf_AristaD;
-    int xf_AristaI, yf_AristaI;
-    boolean soyRaizDelArbol;
+    //metodos propios del nodo
+    public void graficar() {
 
-    int clave;
-    Nodo derecho;
-    Nodo izquierdo;
-
-    public void graficar(JFrame tablero) {
-        g = tablero.getGraphics();
-        if (!soyRaizDelArbol) {
-            g.drawLine(posX + radio, posY + radio, posX + radio, posY - radio);// superior
-
-        }
-        g.drawLine(posX + radio, posY + radio, posX + diametro, posY + diametro);//derecho
-        g.drawLine(posX + radio, posY + radio, posX, posY + diametro);//izquierdo
-
-        
-
-        g.setColor(Color.red);
-        g.fillOval(posX, posY, diametro, diametro);//el nodo en si
-
-       
-
+        //el nodo
+        g.setColor(Color.blue);
+        g.fillRect(posX, posY, width, height);
         g.setColor(Color.black);
-        g.drawString(String.valueOf(clave), posX + radio, posY + radio);
+        g.drawRect(posX, posY, width, height);
+        g.drawString(String.valueOf(clave), posX + width / 3, posY + height / 2);
 
-//        g.drawLine(posX + radio, posY + radio, posX + diametro, posY + radio);//en x
-//        g.drawLine(posX + radio, posY + radio, posX + radio, posY + diametro);// en y
-//        g.drawLine(posX, diametro, posX, diametro);
-//        g.drawLine(posX, posY - radio, posX, diametro);
+        //aristas del nodo
+        g.drawLine(posX + width / 2, posY + height, posX + width / 2, posY + 2 * height);//hacia abajo 
+        g.drawLine(posX + width / 2, posY + 2 * height, posX + width / 2 + width, posY + 2 * height);//hacia la derecha
+        g.drawLine(posX + width / 2, posY + 2 * height, posX + width / 2 - width, posY + 2 * height);//hacia la izquierda
+        g.drawLine(posX + width / 2 - width, posY + 2 * height, posX + width / 2 - width, posY + 3 * height);//para hijo izquierdo
+        g.drawLine(posX + width / 2 + width, posY + 2 * height, posX + width / 2 + width, posY + 3 * height);//para hijo derecho
         g.dispose();
+    }
+
+    public void regraficar() {
+        g.translate(posX+10, posY+40);
+    }
+
+    public int[] getPosHijoDerecho() {
+
+        int coordenadas[] = new int[2];
+        coordenadas[0] = posX + width / 2 + width;
+        coordenadas[1] = posY + 3 * height;
+
+        return coordenadas;
+    }
+
+    public int[] getPosHijoIzquierdo() {
+        int coordenadas[] = new int[2];
+        coordenadas[0] = posX + width / 2 - width;
+        coordenadas[1] = posY + 3 * height;
+
+        return coordenadas;
+    }
+
+    //getters and setters and constructor(lienzo, dato)
+    public Nodo(JPanel lienzo, int clave) {
+
+        this.clave = clave;
+        g = lienzo.getGraphics();
+        posY = 0;
+        posX = lienzo.getWidth() / 2;
 
     }
 
-    public void generarLocalizacion() {
-        xf_AristaS = posX + radio;
-        yf_AristaS = posY - radio;
-
-        xf_AristaD = posX + diametro;
-        yf_AristaD = posY + diametro;
-
-        xf_AristaI = posX;
-        yf_AristaI = posY + diametro;
-
-        posXcentro = posX + radio;
-        posYcentro = posY + radio;
-
+    public int getClave() {
+        return clave;
     }
-    
-    
-    
-    
+
+    public void setClave(int clave) {
+        this.clave = clave;
+    }
+
+    public Graphics getG() {
+        return g;
+    }
+
+    public void setG(Graphics g) {
+        this.g = g;
+    }
+
+    public int getPosX() {
+        return posX;
+    }
+
+    public void setPosX(int posX) {
+        this.posX = posX;
+    }
+
+    public int getPosY() {
+        return posY;
+    }
+
+    public void setPosY(int posY) {
+        this.posY = posY;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public Nodo getDerecho() {
+        return derecho;
+    }
+
+    public void setDerecho(Nodo derecho) {
+        this.derecho = derecho;
+    }
+
+    public Nodo getIzquierdo() {
+        return izquierdo;
+    }
+
+    public void setIzquierdo(Nodo izquierdo) {
+        this.izquierdo = izquierdo;
+    }
 
 }

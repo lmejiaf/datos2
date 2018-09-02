@@ -34,9 +34,10 @@ public class Frame extends javax.swing.JFrame {
         buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        clave = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        lienzo = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -49,7 +50,7 @@ public class Frame extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
 
-        jLabel1.setLabelFor(jTextField1);
+        jLabel1.setLabelFor(clave);
         jLabel1.setText("Clave del nodo");
 
         jButton1.setText("Insertar");
@@ -75,7 +76,7 @@ public class Frame extends javax.swing.JFrame {
                 .addGap(290, 290, 290)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(clave, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 287, Short.MAX_VALUE)
@@ -87,7 +88,7 @@ public class Frame extends javax.swing.JFrame {
                 .addContainerGap(24, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addGap(19, 19, 19))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -95,17 +96,30 @@ public class Frame extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        javax.swing.GroupLayout lienzoLayout = new javax.swing.GroupLayout(lienzo);
+        lienzo.setLayout(lienzoLayout);
+        lienzoLayout.setHorizontalGroup(
+            lienzoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        lienzoLayout.setVerticalGroup(
+            lienzoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 435, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lienzo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(441, 441, 441))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lienzo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -128,25 +142,11 @@ public class Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_formMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//jTextField1.getText()
 
-        if (!jTextField1.getText().isEmpty()) {
-
-            if (isNumber(jTextField1.getText())) {
-                Nodo n = new Nodo();
-                n.soyRaizDelArbol = true;
-                n.posX = getWidth() / 2 - n.radio;//+radio o -radio
-                n.posY = jPanel1.getHeight() + n.radio;//+yf_AD o +yf_AI
-                n.clave = Integer.parseInt(jTextField1.getText());
-                n.generarLocalizacion();
-                if (insertar(n, raizArbol, 1)) {
-                    n.graficar(this);
-
-                }
-            }
-
-        } else {
-            JOptionPane.showMessageDialog(this, "El campo clave no puede estar vacio");
+        Nodo n = null;
+        if (isNumber(clave.getText())) {
+            n = new Nodo(this.lienzo, Integer.parseInt(clave.getText()));
+            insertar(n, raizArbol);
         }
 
 
@@ -196,63 +196,64 @@ public class Frame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JTextField clave;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPanel lienzo;
     // End of variables declaration//GEN-END:variables
 
     public boolean isNumber(String cadena) {
-        try {
-            Integer.parseInt(cadena);
-            return true;
+        if (cadena.length() > 0) {
+            try {
+                Integer.parseInt(cadena);
+                return true;
 
-        } catch (NumberFormatException e) {
+            } catch (NumberFormatException e) {
+                return false;
+
+            }
+        } else {
             return false;
-
         }
+
     }
 
-    public boolean insertar(Nodo n, Nodo raiz, int nivel) {
-
+    public boolean insertar(Nodo x, Nodo padre) {
         if (raizArbol == null) {
-            n.soyRaizDelArbol = true;
-
-            raizArbol = n;
-
+            raizArbol = x;
+            x.graficar();
             return true;
         } else {
-            n.soyRaizDelArbol = false;
-            if (n.clave > raiz.clave) {
-                if (raiz.derecho == null) {
-                    n.posX += n.radio;
-                    n.posY += (n.diametro + n.radio);
-                    raiz.derecho = n;
-                    return true;
-                } else {
-                    n.posX += n.radio;
-                    n.posY += (n.diametro + n.radio);
-                    insertar(n, raiz.derecho, nivel++);
-                }
-            } else if (n.clave < raiz.clave) {
-                if (raiz.izquierdo == null) {
-                    n.posX -= n.radio;
-                    n.posY += (n.diametro + n.radio);
-                    raiz.izquierdo = n;
-                } else {
-                    n.posX -= n.radio;
-                    n.posY += (n.diametro + n.radio);
-                    insertar(n, raiz.izquierdo, nivel++);
-                    return true;
 
+            if (x.getClave() > padre.getClave()) {
+                if (padre.getDerecho() == null) {
+                    padre.setDerecho(x);
+                    x.setPosX(padre.getPosHijoDerecho()[0] - x.getWidth() / 2);
+                    x.setPosY(padre.getPosHijoDerecho()[1]);
+                    x.graficar();
+                    return true;
+                } else {
+                    insertar(x, padre.getDerecho());
                 }
+
+            } else if (x.getClave() < padre.getClave()) {
+                if (padre.getIzquierdo() == null) {
+                    padre.setIzquierdo(x);
+                    x.setPosX(padre.getPosHijoIzquierdo()[0] - x.getWidth() / 2);
+                    x.setPosY(padre.getPosHijoIzquierdo()[1]);
+                    x.graficar();
+                    return true;
+                }else{
+                    insertar(x, padre.getIzquierdo());
+                }
+
             } else {
                 return false;
             }
-        }
 
+        }
         return false;
     }
-
 }
