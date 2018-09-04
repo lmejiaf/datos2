@@ -5,6 +5,8 @@
  */
 package Source;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,12 +16,14 @@ import javax.swing.JOptionPane;
 public class Frame extends javax.swing.JFrame {
 
     Nodo raizArbol;
+    int alturaAnterior = 0;
 
     /**
      * Creates new form Frame
      */
     public Frame() {
         initComponents();
+
     }
 
     /**
@@ -31,7 +35,6 @@ public class Frame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         clave = new javax.swing.JTextField();
@@ -100,7 +103,7 @@ public class Frame extends javax.swing.JFrame {
         lienzo.setLayout(lienzoLayout);
         lienzoLayout.setHorizontalGroup(
             lienzoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 939, Short.MAX_VALUE)
         );
         lienzoLayout.setVerticalGroup(
             lienzoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,26 +130,18 @@ public class Frame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-
-//        int diametro = 50;
-//        int radio= diametro/2;
-//        
-//        Graphics g = getGraphics();
-//        g.setColor(Color.red);
-//        g.fillOval(evt.getX() - radio, evt.getY() - radio, diametro, diametro);
-//        g.setColor(Color.black);
-//        g.drawLine(evt.getX(),evt.getY() , evt.getX() - radio, evt.getY() - radio);
-//        
-//        g.dispose();
-        // TODO add your handling code here:
     }//GEN-LAST:event_formMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        Nodo n = null;
         if (isNumber(clave.getText())) {
-            n = new Nodo(this.lienzo, Integer.parseInt(clave.getText()));
-            insertar(n, raizArbol);
+            Nodo nuevo = new Nodo(lienzo, Integer.parseInt(clave.getText()));
+            raizArbol = insertar(raizArbol, nuevo, Integer.parseInt(clave.getText()));
+            int nuevaAltura = getAltura(raizArbol);
+            if (alturaAnterior != nuevaAltura) {
+                alturaAnterior = nuevaAltura;
+                redibujar(nuevaAltura);
+            }
         }
 
 
@@ -195,7 +190,6 @@ public class Frame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JTextField clave;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -220,40 +214,86 @@ public class Frame extends javax.swing.JFrame {
 
     }
 
-    public boolean insertar(Nodo x, Nodo padre) {
-        if (raizArbol == null) {
-            raizArbol = x;
-            x.graficar();
-            return true;
-        } else {
+    public Nodo insertar(Nodo raiz, Nodo nuevo, int clave) {
+        if (raiz == null) {
+            raiz = nuevo;
+            nuevo.graficar();
+        }
+        if (raiz.getClave() > clave) {
+            raiz.setIzquierdo(insertar(raiz.getIzquierdo(), nuevo, clave));
+        } else if (raiz.getClave() < clave) {
+            raiz.setDerecho(insertar(raiz.getIzquierdo(), nuevo, clave));
+        }
+        return raiz;
+    }
 
-            if (x.getClave() > padre.getClave()) {
-                if (padre.getDerecho() == null) {
-                    padre.setDerecho(x);
-                    x.setPosX(padre.getPosHijoDerecho()[0] - x.getWidth() / 2);
-                    x.setPosY(padre.getPosHijoDerecho()[1]);
-                    x.graficar();
-                    return true;
-                } else {
-                    insertar(x, padre.getDerecho());
-                }
+    public void limpiar() {
+        lienzo.getGraphics().clearRect(0, 0, lienzo.getWidth(), lienzo.getHeight());
+    }
 
-            } else if (x.getClave() < padre.getClave()) {
-                if (padre.getIzquierdo() == null) {
-                    padre.setIzquierdo(x);
-                    x.setPosX(padre.getPosHijoIzquierdo()[0] - x.getWidth() / 2);
-                    x.setPosY(padre.getPosHijoIzquierdo()[1]);
-                    x.graficar();
-                    return true;
-                }else{
-                    insertar(x, padre.getIzquierdo());
-                }
+    public void redibujar(int altura) {
+        limpiar();//limpio
+        recrearArbol(raizArbol, altura);//cambiar ancho de las aristas
+        regraficarArbol(raizArbol);//redibujar el arbol con las nuevas aristas
+    }
 
-            } else {
-                return false;
+    public void recrearArbol(Nodo raiz, int altura) {
+        Queue<Nodo> cola = new LinkedList();
+        cola.add(raiz);
+        Nodo n;
+        int nivel = 0;
+        while (!cola.isEmpty()) {
+
+            n = cola.poll();
+            //accion, la que sea
+            n.aumentoFactor(altura, nivel);
+            //fin accion
+            if (n.getIzquierdo() != null) {
+                nivel++;
+                n.ponerHijos();
+                cola.add(n.getIzquierdo());
+            }
+            if (n.getDerecho() != null) {
+                nivel++;
+                n.ponerHijos();
+                cola.add(n.getDerecho());
             }
 
         }
-        return false;
     }
+
+    public int getAltura(Nodo raiz) {
+
+        if (raiz != null) {
+            if (raiz.getDerecho() == null && raiz.getIzquierdo() == null) {
+                return 0;
+            } else {
+                return 1 + Math.max(getAltura(raiz.getDerecho()), getAltura(raiz.getIzquierdo()));
+            }
+
+        } else {
+            return 0;
+        }
+    }
+
+    public void regraficarArbol(Nodo raiz) {
+        Queue<Nodo> cola = new LinkedList();
+        cola.add(raiz);
+        Nodo n;
+        while (!cola.isEmpty()) {
+
+            n = cola.poll();
+            //accion, la que sea
+            n.graficar();
+            //fin accion
+            if (n.getIzquierdo() != null) {
+                cola.add(n.getIzquierdo());
+            }
+            if (n.getDerecho() != null) {
+                cola.add(n.getDerecho());
+            }
+
+        }
+    }
+
 }
