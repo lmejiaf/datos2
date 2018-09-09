@@ -5,18 +5,28 @@
  */
 package Source;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 /**
  *
  * @author luis
  */
 public class Aux {
 
-    static Nodo raiz;
-    
     public static void main(String[] args) {
-
+//        Tree a = new Tree();
+//        Node padre = new Node();
+//        padre.name = "luis";
+//
+//        Node hijo = new Node();
+//        hijo.name = "andres";
+//
+//        Node hijo2 = new Node();
+//        hijo2.name = "julio";
+//
+//        Node hijo3 = new Node();
+//        hijo3.name = "juanchita";
+//        
+//        a.add(hijo2, null);
+//        
+//        a.forLevels(padre);
     }
 }
