@@ -5,6 +5,7 @@
  */
 package Source;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.util.LinkedList;
 import javax.swing.DefaultListModel;
@@ -37,7 +38,6 @@ public class Wall extends javax.swing.JFrame {
 
         canvas = new javax.swing.JPanel();
         services = new javax.swing.JPanel();
-        jSeparator2 = new javax.swing.JSeparator();
         jButton1 = new javax.swing.JButton();
         txtParentNameAdd = new javax.swing.JTextField();
         txtChildNameAdd = new javax.swing.JTextField();
@@ -46,16 +46,7 @@ public class Wall extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         listOptionsAdd = new javax.swing.JList<Node>();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        txtChildNameRemove = new javax.swing.JTextField();
-        txtParentNameRemove = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        listOptionsRemove = new javax.swing.JList<Node>();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
 
@@ -72,17 +63,17 @@ public class Wall extends javax.swing.JFrame {
         canvas.setLayout(canvasLayout);
         canvasLayout.setHorizontalGroup(
             canvasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 598, Short.MAX_VALUE)
+            .addGap(0, 702, Short.MAX_VALUE)
         );
         canvasLayout.setVerticalGroup(
             canvasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 573, Short.MAX_VALUE)
         );
 
         services.setBackground(new java.awt.Color(51, 153, 255));
         services.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0, 153, 204)), "Services", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DejaVu Sans Light", 3, 18))); // NOI18N
 
-        jButton1.setText("Add");
+        jButton1.setText("Add or reload");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -104,26 +95,7 @@ public class Wall extends javax.swing.JFrame {
         listOptionsAdd.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(listOptionsAdd);
 
-        jLabel3.setText("Nombre del padre");
-
-        jLabel4.setText("Nombre del hijo");
-
-        listOptionsRemove.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 102, 102)), "Matches List", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(0, 0, 0))); // NOI18N
-        listOptionsRemove.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane2.setViewportView(listOptionsRemove);
-
-        jButton3.setText("Remove");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        jButton4.setText("Show");
-
         jLabel5.setText("Add");
-
-        jLabel6.setText("Remove");
 
         jButton6.setText("Show Node");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -136,13 +108,13 @@ public class Wall extends javax.swing.JFrame {
         services.setLayout(servicesLayout);
         servicesLayout.setHorizontalGroup(
             servicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator2)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(jScrollPane2)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, servicesLayout.createSequentialGroup()
-                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3))
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1))
             .addGroup(servicesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(servicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,24 +128,7 @@ public class Wall extends javax.swing.JFrame {
                             .addComponent(txtParentNameAdd)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, servicesLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel5))
-                    .addGroup(servicesLayout.createSequentialGroup()
-                        .addGroup(servicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(servicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtChildNameRemove)
-                            .addComponent(txtParentNameRemove)))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, servicesLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel6))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, servicesLayout.createSequentialGroup()
-                .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1))
+                        .addComponent(jLabel5))))
         );
         servicesLayout.setVerticalGroup(
             servicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,25 +150,7 @@ public class Wall extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(servicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtParentNameRemove, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18)
-                .addGroup(servicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtChildNameRemove, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(8, 8, 8)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(servicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
-                .addGap(26, 26, 26))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jButton5.setText("Start Tree");
@@ -229,63 +166,24 @@ public class Wall extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(canvas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(services, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(services, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(canvas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(services, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addComponent(canvas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        String child = txtChildNameAdd.getText();
-//        String parent = txtParentNameAdd.getText();
-        if (listOptionsAdd.getModel().getSize() != 0) {
-            if (!child.isEmpty()) {
-//            String aux1 = parent;
-                String aux2 = child;
-//            String aux11 = aux1.replaceAll(" ", "");
-                String aux22 = aux2.replaceAll(" ", "");
-
-                if (aux22.length() != 0) {
-                    Node p = listOptionsAdd.getSelectedValue();
-                    if (p != null) {
-                        family.add(p, new Node(child));
-                        listOptionsAdd.setModel(new DefaultListModel());
-                    }
-
-                }
-
-            }
-        }
-        family.paint(canvas);
-
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        String parent = txtParentNameAdd.getText();
-        if (!parent.isEmpty()) {
-            String aux1 = parent;
-            String aux = aux1.replaceAll(" ", "");
-            if (aux.length() != 0) {
-                listOptionsAdd.setModel(family.getMatchModel(parent.trim()));
-            }
-        }
-
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
@@ -307,31 +205,12 @@ public class Wall extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        if (family.isEmpty()) {
-            setEnabledComponents(false);
-        }
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-        family.paintForLevels(family.rootTree, canvas);
-        if (listOptionsAdd.getModel().getSize() != 0) {
-            Node p = listOptionsAdd.getSelectedValue();
-            if (p != null) {
-                p.selectedAnimation();
-            }
-        }
-    }//GEN-LAST:event_jButton6ActionPerformed
-
     private void canvasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_canvasMouseClicked
         // TODO add your handling code here:
         family.paint(canvas);
-
         Node n = family.searchNodeByPosition(evt.getX(), evt.getY());
         if (n != null) {
-            //hallar Padre, Tío, Hermano, Primo, Ninguno.
+            //hallar primo, hermano, tio, papa, Ninguno.
             n.selectedAnimation();
             Node padre = family.searchPartner(n);
 
@@ -353,12 +232,61 @@ public class Wall extends javax.swing.JFrame {
                     }
 
                 }
+            } else {
+                n.selectedAnimation();
             }
 
         }
 
-
     }//GEN-LAST:event_canvasMouseClicked
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        family.paintForLevels(family.rootTree, canvas);
+        if (listOptionsAdd.getModel().getSize() != 0) {
+            Node p = listOptionsAdd.getSelectedValue();
+            if (p != null) {
+                p.selectedAnimation();
+            }
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        String parent = txtParentNameAdd.getText();
+        if (!parent.isEmpty()) {
+            String aux1 = parent;
+            String aux = aux1.replaceAll(" ", "");
+            if (aux.length() != 0) {
+                listOptionsAdd.setModel(family.getMatchModel(parent.trim()));
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String child = txtChildNameAdd.getText();
+        //        String parent = txtParentNameAdd.getText();
+        if (listOptionsAdd.getModel().getSize() != 0) {
+            if (!child.isEmpty()) {
+                //            String aux1 = parent;
+                String aux2 = child;
+                //            String aux11 = aux1.replaceAll(" ", "");
+                String aux22 = aux2.replaceAll(" ", "");
+
+                if (aux22.length() != 0) {
+                    Node p = listOptionsAdd.getSelectedValue();
+                    if (p != null) {
+                        family.add(p, new Node(child));
+                        listOptionsAdd.setModel(new DefaultListModel());
+                    }
+
+                }
+
+            }
+        }
+        family.paint(canvas);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -399,26 +327,16 @@ public class Wall extends javax.swing.JFrame {
     private javax.swing.JPanel canvas;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JList<Node> listOptionsAdd;
-    private javax.swing.JList<Node> listOptionsRemove;
     private javax.swing.JPanel services;
     private javax.swing.JTextField txtChildNameAdd;
-    private javax.swing.JTextField txtChildNameRemove;
     private javax.swing.JTextField txtParentNameAdd;
-    private javax.swing.JTextField txtParentNameRemove;
     // End of variables declaration//GEN-END:variables
 
     private void setEnabledComponents(boolean enabled) {

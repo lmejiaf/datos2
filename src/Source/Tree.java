@@ -5,6 +5,7 @@
  */
 package Source;
 
+import java.awt.Color;
 import java.util.LinkedList;
 import java.util.Queue;
 import javax.swing.DefaultListModel;
@@ -179,7 +180,7 @@ public class Tree {
             Node n;
             int altura = getHeight(this.rootTree);
             int nivel = 0;
-            if (altura % 4 == 0 && altura != 0) {
+            if (altura % 4 == 0 && altura != 0 && height != altura) {
                 factorAnchura++;
             }
             rootTree.factorExpansion = altura + factorAnchura;
@@ -319,5 +320,7 @@ public class Tree {
             return null;
         }
     }
+
+    
 
 }

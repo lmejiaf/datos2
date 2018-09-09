@@ -26,8 +26,7 @@ public class Node {
     final int height = 30;
     int posX;
     int posY;
-    
-    
+
     public void fixCoordenadasRoot(JPanel lienzo) {
         posX = lienzo.getWidth() / 2 - width / 2;
         posY = 0;
@@ -69,6 +68,14 @@ public class Node {
 
     public void selectedAnimation() {
         g.setColor(Color.YELLOW);
+        g.fillRect(posX, posY, width, height);
+        g.setColor(Color.BLACK);
+        g.drawRect(posX, posY, width, height);
+        g.drawString(name, posX + width / 4, posY + height / 3);
+    }
+
+    public void lightHow(Color c) {
+        g.setColor(c);
         g.fillRect(posX, posY, width, height);
         g.setColor(Color.BLACK);
         g.drawRect(posX, posY, width, height);
