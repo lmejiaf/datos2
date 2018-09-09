@@ -7,7 +7,7 @@ package Source;
 
 import java.util.LinkedList;
 import java.util.Queue;
-import javax.swing.JOptionPane;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -23,6 +23,7 @@ public class Frame extends javax.swing.JFrame {
      */
     public Frame() {
         initComponents();
+        listOptions.setModel(new DefaultListModel());
 
     }
 
@@ -37,24 +38,47 @@ public class Frame extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        clave = new javax.swing.JTextField();
+        nombreIntegrante = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        nombrePadre = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        listOptions = new javax.swing.JList<>();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         lienzo = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
-        setResizable(false);
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);
             }
         });
+        addWindowStateListener(new java.awt.event.WindowStateListener() {
+            public void windowStateChanged(java.awt.event.WindowEvent evt) {
+                formWindowStateChanged(evt);
+            }
+        });
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+            public void windowDeactivated(java.awt.event.WindowEvent evt) {
+                formWindowDeactivated(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
 
-        jLabel1.setLabelFor(clave);
-        jLabel1.setText("Clave del nodo");
+        jLabel1.setLabelFor(nombreIntegrante);
+        jLabel1.setText("Nombre del nuevo integrante");
 
         jButton1.setText("Insertar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -63,11 +87,23 @@ public class Frame extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(255, 102, 102));
-        jButton2.setText("X");
+        jLabel2.setText("Nombre del padre");
+
+        listOptions.setModel(new DefaultListModel());
+        listOptions.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane2.setViewportView(listOptions);
+
+        jButton2.setText("Aceptar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("ver");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
             }
         });
 
@@ -76,38 +112,63 @@ public class Frame extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(290, 290, 290)
-                .addComponent(jLabel1)
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(nombreIntegrante, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nombrePadre, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(clave, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 287, Short.MAX_VALUE)
-                .addComponent(jButton2))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel1)
-                    .addComponent(clave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addGap(19, 19, 19))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jButton2)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(nombrePadre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(nombreIntegrante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton1)
+                    .addComponent(jButton3))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
+
+        lienzo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lienzoMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout lienzoLayout = new javax.swing.GroupLayout(lienzo);
         lienzo.setLayout(lienzoLayout);
         lienzoLayout.setHorizontalGroup(
             lienzoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 939, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         lienzoLayout.setVerticalGroup(
             lienzoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 435, Short.MAX_VALUE)
+            .addGap(0, 488, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -115,14 +176,14 @@ public class Frame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lienzo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lienzo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lienzo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lienzo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -134,25 +195,136 @@ public class Frame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        if (isNumber(clave.getText())) {
-            Nodo nuevo = new Nodo(lienzo, Integer.parseInt(clave.getText()));
-            raizArbol = insertar(raizArbol, nuevo, Integer.parseInt(clave.getText()));
-            int nuevaAltura = getAltura(raizArbol);
-            if (alturaAnterior != nuevaAltura) {
-                alturaAnterior = nuevaAltura;
-                redibujar(nuevaAltura);
+        listOptions.setModel(new DefaultListModel());
+        String nombreP = nombrePadre.getText();
+        String nombreH = nombreIntegrante.getText();
+
+        if (!nombreP.isEmpty() && nombreH.isEmpty()) {
+            nombreP = nombreP.trim();
+            if (raizArbol == null) {
+                Nodo nuevo = new Nodo(lienzo, nombreP);
+
+                raizArbol = nuevo;
+
+            }
+        } else if (!nombreP.isEmpty() && !nombreH.isEmpty()) {
+            nombreP = nombreP.trim();
+            nombreH = nombreH.trim();
+            LinkedList<Nodo> padres = buscarPadresPorNombre(nombreP, raizArbol);
+
+            if (padres.size() == 1) {
+
+                Nodo p = padres.getFirst();
+                Nodo h = new Nodo(lienzo, nombreH);
+                if (p.getDerecho() == null) {
+                    p.setDerecho(h);
+                    p.asignarPosHijos();
+//                    h.graficar();
+                    int nuevaAltura = getAltura(raizArbol);
+                    if (alturaAnterior != nuevaAltura) {
+                        redibujar(raizArbol);
+                        alturaAnterior = nuevaAltura;
+                    }
+                } else if (p.getIzquierdo() == null) {
+                    p.setIzquierdo(h);
+                    p.asignarPosHijos();
+//                    h.graficar();
+                } else {
+                    System.out.println("No se pudo insertar el integrante a este padre");
+                }
+            } else {
+                if (!padres.isEmpty()) {
+                    DefaultListModel<Nodo> modelo = new DefaultListModel();
+                    padres.forEach((padre) -> {
+                        //meter en la lista 
+                        modelo.addElement(padre);
+                        padre.iluminar();
+
+//                            modelo.addElement();
+                    });
+                    listOptions.setModel(modelo);
+
+                }
+
             }
         }
+        redibujar(raizArbol);
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_formWindowOpened
+
+    private void formWindowStateChanged(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowStateChanged
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_formWindowStateChanged
+
+    private void lienzoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lienzoMouseClicked
+        // TODO add your handling code here:
+
+
+    }//GEN-LAST:event_lienzoMouseClicked
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        setVisible(false);
-        System.exit(0);
+        DefaultListModel<Nodo> modelo = new DefaultListModel();
+
+        String nombreH = nombreIntegrante.getText();
+        if (!nombreH.isEmpty()) {
+            nombreH = nombreH.trim();
+            Nodo p = listOptions.getSelectedValue();
+            Nodo h = new Nodo(lienzo, nombreH);
+            if (p != null) {
+
+                if (p.getDerecho() == null) {
+                    p.setDerecho(h);
+                    p.asignarPosHijos();
+
+                } else if (p.getIzquierdo() == null) {
+                    p.setIzquierdo(h);
+                    p.asignarPosHijos();
+
+                } else {
+                    System.out.println("No se pudo insertar el integrante a este padre");
+                }
+            }
+
+            for (int i = 0; i < modelo.size(); i++) {
+                modelo.get(i).desiluminar();
+            }
+        }
+
+        modelo.clear();
+        listOptions.setModel(modelo);
+        nombrePadre.setText("");
+        nombreIntegrante.setText("");
+        redibujar(raizArbol);
 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        redibujar(raizArbol);
+        Nodo p = listOptions.getSelectedValue();
+        if (p != null) {
+            p.iluminar2();
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        // TODO add your handling code here:
+                redibujar(raizArbol);
+
+    }//GEN-LAST:event_formWindowGainedFocus
+
+    private void formWindowDeactivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowDeactivated
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_formWindowDeactivated
 
     /**
      * @param args the command line arguments
@@ -168,16 +340,24 @@ public class Frame extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Frame.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Frame.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Frame.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Frame.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -190,54 +370,92 @@ public class Frame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField clave;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel lienzo;
+    private javax.swing.JList<Nodo> listOptions;
+    private javax.swing.JTextField nombreIntegrante;
+    private javax.swing.JTextField nombrePadre;
     // End of variables declaration//GEN-END:variables
 
-    public boolean isNumber(String cadena) {
-        if (cadena.length() > 0) {
-            try {
-                Integer.parseInt(cadena);
-                return true;
+    public void redibujar(Nodo raiz) {
+        limpiar();
 
-            } catch (NumberFormatException e) {
-                return false;
+        int altura = getAltura(raiz);
+        if (raiz != null) {
+
+            Queue<Nodo> cola = new LinkedList();
+            cola.add(raiz);
+            Nodo n;
+            int nivel = 0;
+            while (!cola.isEmpty()) {
+
+                n = cola.poll();
+                //accion, la que sea
+                n.cambiarFactorExpansion(altura, nivel);
+                n.asignarPosHijos();
+                n.graficar();
+                //fin accion
+                if (n.getIzquierdo() != null) {
+                    nivel++;
+                    cola.add(n.getIzquierdo());
+                }
+                if (n.getDerecho() != null) {
+                    nivel++;
+                    cola.add(n.getDerecho());
+                }
 
             }
-        } else {
-            return false;
+
         }
 
     }
 
-    public Nodo insertar(Nodo raiz, Nodo nuevo, int clave) {
-        if (raiz == null) {
-            raiz = nuevo;
-            nuevo.graficar();
+    public LinkedList buscarPadresPorNombre(String nombre, Nodo raiz) {
+        LinkedList<Nodo> listadepadres = new LinkedList();
+
+        if (raiz != null) {
+
+            Queue<Nodo> cola = new LinkedList();
+            cola.add(raiz);
+            Nodo n;
+            int nivel = 0;
+            while (!cola.isEmpty()) {
+
+                n = cola.poll();
+                //accion, la que sea
+                if (n.getNombre().equalsIgnoreCase(nombre)) {
+
+                    listadepadres.add(n);
+
+                }
+                //fin accion
+                if (n.getIzquierdo() != null) {
+                    nivel++;
+                    cola.add(n.getIzquierdo());
+                }
+                if (n.getDerecho() != null) {
+                    nivel++;
+                    cola.add(n.getDerecho());
+                }
+
+            }
         }
-        if (raiz.getClave() > clave) {
-            raiz.setIzquierdo(insertar(raiz.getIzquierdo(), nuevo, clave));
-        } else if (raiz.getClave() < clave) {
-            raiz.setDerecho(insertar(raiz.getIzquierdo(), nuevo, clave));
-        }
-        return raiz;
+        return listadepadres;
     }
 
+// para el redibujado
     public void limpiar() {
         lienzo.getGraphics().clearRect(0, 0, lienzo.getWidth(), lienzo.getHeight());
     }
 
-    public void redibujar(int altura) {
-        limpiar();//limpio
-        recrearArbol(raizArbol, altura);//cambiar ancho de las aristas
-        regraficarArbol(raizArbol);//redibujar el arbol con las nuevas aristas
-    }
-
-    public void recrearArbol(Nodo raiz, int altura) {
+    public void redibujar(Nodo raiz, int altura) {
+        limpiar();
         Queue<Nodo> cola = new LinkedList();
         cola.add(raiz);
         Nodo n;
@@ -246,54 +464,32 @@ public class Frame extends javax.swing.JFrame {
 
             n = cola.poll();
             //accion, la que sea
-            n.aumentoFactor(altura, nivel);
+
             //fin accion
             if (n.getIzquierdo() != null) {
                 nivel++;
-                n.ponerHijos();
                 cola.add(n.getIzquierdo());
             }
             if (n.getDerecho() != null) {
                 nivel++;
-                n.ponerHijos();
                 cola.add(n.getDerecho());
             }
 
         }
+
     }
 
     public int getAltura(Nodo raiz) {
-
-        if (raiz != null) {
-            if (raiz.getDerecho() == null && raiz.getIzquierdo() == null) {
-                return 0;
-            } else {
-                return 1 + Math.max(getAltura(raiz.getDerecho()), getAltura(raiz.getIzquierdo()));
-            }
-
+        if (raiz == null) {
+            return -1;
         } else {
-            return 0;
+            return (1 + Math.max(getAltura(raiz.getIzquierdo()), getAltura(raiz.getDerecho())));
         }
+
     }
 
-    public void regraficarArbol(Nodo raiz) {
-        Queue<Nodo> cola = new LinkedList();
-        cola.add(raiz);
-        Nodo n;
-        while (!cola.isEmpty()) {
+    public void aa() {
 
-            n = cola.poll();
-            //accion, la que sea
-            n.graficar();
-            //fin accion
-            if (n.getIzquierdo() != null) {
-                cola.add(n.getIzquierdo());
-            }
-            if (n.getDerecho() != null) {
-                cola.add(n.getDerecho());
-            }
-
-        }
     }
 
 }
